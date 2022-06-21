@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman</title>
+</head>
+<body>
+    <script>
+        // create an array of words
+        let wordList = ["code", "coding", "loop", "array", "function", "variable", "javascript", "vanilla javascript", "js", "html", "css", "algorithm", "argument", "arithmetic operator", "assignment operator", "camel case", "coding language", "conditional statement", "for loop", "while loop", "if statement", "else statement", "java", "react js", "python", "statement", "truthy", "falsey", "string", "number", "boolean", "null", "undefined"];
+
+        // pick a random word from the wordList array
+        let word = wordList[Math.floor(Math.random() * wordList.length)];
+
+        // set up answerArray to show how many letters there are
+        // using _'s
+        let answerArray = [];
+
+        for (let i = 0; i < word.length; i++){
+            answerArray[i] = "_"
+        };
+
+        // create a variable to hold the number of remainingLetters to be guessed
+        let remainingLetters = word.length;
+
+        //                     **** MAIN GAME LOOP ****
+
+        // while there are letters left to be guessed
+        while (remainingLetters > 0){
+            // show the player their progress
+            alert(answerArray.join(" "));
+
+            // get a guess from the player
+            let guess = prompt("Guess a letter or space, or click Cancel to stop playing.");
+
+            // if the guess is blank
+            if (guess === null) {
+                // exit the game loop
+                break;
+            }
+
+            // if the guess is more than one letter, or no letters
+            else if (guess.length !== 1) {
+                // alert them to guess a single letter only
+                alert("Please enter a single letter or space.");
+
+                // valid guess
+            } else {
+                // update game state with the guess
+                for(let j = 0; j < word.length; j++) {
+                    // if the letter they guessed is in the word
+                    // at that point or index
+                    if(word[j] === guess){
+                        // update answerArray with the letter they guessed at that index
+
+                        answerArray[j] = guess;
+
+                        // subtract one from remainingLetters
+                        remainingLetters--;
+
+                    }
+                }
+            }
+            //              **** END OF GAME LOOP **** 
+        } 
+
+        // let player know the word
+        alert(answerArray.join(" "));
+
+        // congratulate the player 
+        alert("Good job! The answer was " + word);
+    </script>
+</body>
+</html>
